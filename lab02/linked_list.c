@@ -1,6 +1,6 @@
+#include "linked_list.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "linked_list.h"
 
 /* returns a new node whose data is set to DATA and next is set to NULL */
 Node *create_node(int data) {
@@ -29,16 +29,19 @@ void free_list(Node *head) {
    This function is heavily commented for instructional purposes. Please
    never use this many comments when you are writing code. */
 void add_to_front(struct Node **head, int data) {
-    /* Check if the head is NULL to make sure that we do not dereference a NULL pointer
-    because that would result in a segfault */
-    if (head == NULL) return;
+    /* Check if the head is NULL to make sure that we do not dereference a NULL
+    pointer because that would result in a segfault */
+    if (head == NULL)
+        return;
     struct Node *new_node = create_node(data);
-    /* The new node's next should point to the head 
+    /* The new node's next should point to the head
        (this works even if the head is NULL) */
     new_node->next = *head;
-    /* We must set HEAD using the following line in order to change the original list */
+    /* We must set HEAD using the following line in order to change the original
+     * list */
     *head = new_node;
-    /* The following line would not work because it would only change our local copy of HEAD */
+    /* The following line would not work because it would only change our local
+     * copy of HEAD */
     /* head = new_node */
 }
 
@@ -53,7 +56,7 @@ void print_list(struct Node *head) {
 
 /* Iteratively reverses a linked list whose first node is HEAD */
 void reverse_list(struct Node **head) {
-    if (head == NULL) {
+    if (head == NULL || *head == NULL) {
         return;
     }
     struct Node *curr = *head;
